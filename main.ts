@@ -20,8 +20,7 @@ async function badge(c: Context, user_name: string, tp: string) {
 }
 
 api.get("/", (c) =>
-  c.text(`
-[ このAPIの使い方 ]
+  c.text(`[ このAPIの使い方 ]
 このAPIには以下のエンドポイントが用意されています
 
 ・api/{user_name}/like

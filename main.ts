@@ -10,11 +10,11 @@ async function badge(c: Context, user_name: string, tp: string) {
   if (result.isOk()) {
     const badges = result.unwrap();
 
-    c.header("Content-Type", "text/svg");
+    c.header("Content-Type", "image/svg+xml");
     return c.body(badges[tp as keyof typeof badges]);
   } else {
     // internal server error
-    c.header("Content-Type", "text/svg");
+    c.header("Content-Type", "image/svg+xml");
     return c.body(await error_badge());
   }
 }

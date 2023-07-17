@@ -19,6 +19,30 @@ async function badge(c: Context, user_name: string, tp: string) {
   }
 }
 
+api.get("/", (c) =>
+  c.text(`
+[ このAPIの使い方 ]
+このAPIには以下のエンドポイントが用意されています
+
+・api/{user_name}/like
+・api/{user_name}/followings
+・api/{user_name}/articles
+・api/{user_name}/scraps
+・api/{user_name}/books
+
+{user_name}にはZennのユーザー名を指定してください。
+
+[ Q&A ]
+・スクレイピングだけど大丈夫？
+もし何かあったら速攻シャットダウンします。それ前提で利用してください。
+一応申し訳程度にZennへリクエストを飛ばす前に1秒sleepさせる処理を入れてます。
+
+・なんかバッジがオレンジ色なんだけど
+Zenn Errorなどと表示されていたらサーバー内部でエラーが発生しています。
+ユーザーやエンドポイントが正しいかどうか今一度確認してください。
+それでも治らなかった場合はissueを立てて下さい。
+`));
+
 api.get("/:username/like", async (c) => {
   const user_name = c.req.param("username");
   return await badge(c, user_name, "like");

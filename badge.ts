@@ -114,11 +114,12 @@ async function fetch_info(
 
   // console.log(articles);
 
-  const scraps = articlesInfo?.querySelector("a:nth-child(2) > span");
+  const scraps = articlesInfo?.querySelector("a:nth-child(2) > span")
+    ?.textContent;
   const book = (() => {
     const book = articlesInfo?.querySelector("a:nth-child(2) > span");
     // Bookを出していない人はbookの数字がscrapsと同じになる
-    if (scraps?.textContent == book?.textContent) {
+    if (scraps == book?.textContent) {
       return "0";
     } else {
       return book?.textContent;
@@ -134,8 +135,3 @@ async function fetch_info(
     books: maybe(book, is.String) ?? "",
   });
 }
-
-// const badge = await generate_badge("comamoca");
-//
-// const articles = badge.unwrapOr("エラーが発生しました");
-// console.log(articles.articles);

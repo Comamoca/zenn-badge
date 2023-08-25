@@ -103,9 +103,17 @@ async function fetch_info(
   const articlesInfo = doc?.querySelector(
     "#__next > div.Container_default__wsJLp.Container_common__bSTKj > div > div > div > div",
   );
-  const articles = articlesInfo?.querySelector(
-    "a.UserHeader_tabItemActive__VZPFf.UserHeader_tabItem__BXhsu > span",
+
+  // const articles = articlesInfo?.querySelector(
+  //   "div > div > a:nth-child(1) > span",
+  // )?.textContent;
+
+  const articles = doc?.querySelector(
+    "#__next > div.Container_default__wsJLp.Container_common__bSTKj > div > div > div > div > div > div > a:nth-child(1) > span",
   )?.textContent;
+
+  // console.log(articles);
+
   const scraps = articlesInfo?.querySelector("a:nth-child(2) > span");
   const book = (() => {
     const book = articlesInfo?.querySelector("a:nth-child(2) > span");
@@ -117,6 +125,7 @@ async function fetch_info(
     }
   })();
 
+  // エラーが発生したら空白が返ってくる
   return Ok({
     like: maybe(like, is.String) ?? "",
     followings: maybe(followings, is.String) ?? "",
@@ -125,3 +134,8 @@ async function fetch_info(
     books: maybe(book, is.String) ?? "",
   });
 }
+
+// const badge = await generate_badge("comamoca");
+//
+// const articles = badge.unwrapOr("エラーが発生しました");
+// console.log(articles.articles);

@@ -1,3 +1,5 @@
+import { DOMParser } from "https://deno.land/x/deno_dom@v0.1.45/deno-dom-wasm.ts";
+import { ensure, is, maybe } from "jsr:@core/unknownutil";
 import { Err, Ok, Result } from "https://deno.land/x/monads@v0.5.10/mod.ts";
 import { sleep } from "https://deno.land/x/sleep@v1.2.1/mod.ts";
 
@@ -91,20 +93,22 @@ async function fetch_info(
   const doc = new DOMParser().parseFromString(html, "text/html");
 
   const info = doc?.querySelector(
+    "#__next > header.UserHeader_header__wgo13 > div > div > div.UserHeader_profileMain__6Itxi > div.UserHeader_profileLower__IQG7z > div.UserHeader_metaContainer__y__ik",
   );
 
   const like = info?.querySelector(
+    "button:nth-child(1) > span",
+  )?.textContent;
   const followings = info?.querySelector("button:nth-child(2) > span")
     ?.textContent;
 
   const articlesInfo = doc?.querySelector(
+    "#__next > div.Container_default__13H8g.Container_common__figYY > div",
   );
 
-
   const articles = doc?.querySelector(
+    "div > div > div > div > div > div > a:nth-child(1) > span",
   )?.textContent;
-
-  // console.log(articles);
 
   const scraps = articlesInfo?.querySelector("a:nth-child(2) > span")
     ?.textContent;
@@ -119,6 +123,12 @@ async function fetch_info(
   })();
 
   // エラーが発生したら空白が返ってくる
+
   return Ok({
+    like: ensure(like, is.String),
+    followings: ensure(followings, is.String),
+    articles: ensure(articles, is.String),
+    scraps: ensure(scraps, is.String),
+    books: ensure(book, is.String),
   });
 }

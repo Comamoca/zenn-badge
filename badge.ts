@@ -93,23 +93,17 @@ async function fetch_info(
   const doc = new DOMParser().parseFromString(html, "text/html");
 
   const info = doc?.querySelector(
-    "#__next > header:nth-child(2) > div > div > div.UserHeader_profileMain__KfcU5 > div.UserHeader_profileLower__U1cVo > div.UserHeader_metaContainer__KPiiC",
   );
 
-  const like = info?.querySelector("button:nth-child(1) > span")?.textContent;
+  const like = info?.querySelector(
   const followings = info?.querySelector("button:nth-child(2) > span")
     ?.textContent;
 
   const articlesInfo = doc?.querySelector(
-    "#__next > div.Container_default__wsJLp.Container_common__bSTKj > div > div > div > div",
   );
 
-  // const articles = articlesInfo?.querySelector(
-  //   "div > div > a:nth-child(1) > span",
-  // )?.textContent;
 
   const articles = doc?.querySelector(
-    "#__next > div.Container_default__wsJLp.Container_common__bSTKj > div > div > div > div > div > div > a:nth-child(1) > span",
   )?.textContent;
 
   // console.log(articles);

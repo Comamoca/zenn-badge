@@ -1,5 +1,3 @@
-import { DOMParser } from "https://deno.land/x/deno_dom/deno-dom-wasm.ts";
-import { is, maybe } from "https://deno.land/x/unknownutil@v3.2.0/mod.ts";
 import { Err, Ok, Result } from "https://deno.land/x/monads@v0.5.10/mod.ts";
 import { sleep } from "https://deno.land/x/sleep@v1.2.1/mod.ts";
 
@@ -122,10 +120,5 @@ async function fetch_info(
 
   // エラーが発生したら空白が返ってくる
   return Ok({
-    like: maybe(like, is.String) ?? "",
-    followings: maybe(followings, is.String) ?? "",
-    articles: maybe(articles, is.String) ?? "",
-    scraps: maybe(scraps, is.String) ?? "",
-    books: maybe(book, is.String) ?? "",
   });
 }
